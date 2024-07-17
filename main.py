@@ -5,7 +5,7 @@ import sys
 
 def open_file(filename):
     if sys.platform == 'win32':
-        os.startfile(filename)
+        os.startfile(filename.replace('/', '\\'))
     else:
         opener = 'open' if sys.platform == 'darwin' else 'xdg-open'
         os.system(f'{opener} "{filename}" > ./.log 2>&1 &')
@@ -36,6 +36,7 @@ def download_audio(word):
 
 
 def main():
+    os.chdir(sys.path[0])
     os.makedirs('./files', exist_ok=True)
     while True:
         clear_screen()
